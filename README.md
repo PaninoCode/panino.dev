@@ -1,3 +1,3 @@
 # Panino.dev
 
-My website, build with a custom static site generator.
+My website, built with a custom static site generator.
