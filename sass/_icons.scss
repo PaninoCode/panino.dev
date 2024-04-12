@@ -1,0 +1,42 @@
+.square-icon {
+    fill: $light;
+    text-decoration: none;
+    width: 1.25rem;
+    aspect-ratio: 1 / 1;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+    transition: 460ms;
+    cursor: pointer;
+
+    span {
+        display: block;
+        background: var(--icon-src) no-repeat center center;
+        background-size: contain;
+        width: 100%;
+        height: 100%;
+        transition: 150ms;
+    }
+}
+
+.icon-hover {
+    span:hover {
+        background: var(--icon-hover-src) no-repeat center center;
+        background-size: contain;
+    }
+}
+
+.square-icon-lg {
+    padding: 0 !important;
+    width: 2rem !important;
+}
+
+.square-icon-md {
+    padding: 0 !important;
+    width: 1.5rem !important;
+}
+
+.square-icon-sm {
+    padding: 0 !important;
+    width: 1rem !important;
+}

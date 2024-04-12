@@ -1,0 +1,127 @@
+<nav class="header-navbar">
+    <div class="primary-navbar d-flex flex-center flex-space-between">
+        <a class="primary-navbar-branding" href="<?gen WEB-ROOT ?>/">Panino.dev</a>
+
+        <div class="d-flex flex-center">
+
+            <a href="<?gen WEB-ROOT ?>/about.html" class="btn-dark navigation-link ">
+                About
+            </a>
+            <div class="navigation-dropdown">
+                <a class="btn-dark navigation-link">
+                    <span class="square-icon"><span></span></span>
+                    My Projects
+                </a>
+                <div class="navigation-dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+
+            <span class="square-icon bg-primary-dark-transparent-50 navigation-icon navigation-icon-desktop-only"
+                onclick="showSidebar('language');">
+                <span style="--icon-src: url('/images/bs-icons/bs-translate-light.svg');"></span>
+            </span>
+            <span class="square-icon bg-primary-dark-transparent-50 navigation-icon navigation-icon-desktop-only"
+                onclick="showSidebar('settings');">
+                <span style="--icon-src: url('/images/bs-icons/bs-sliders2-vertical-light.svg');"></span>
+            </span>
+            <span class="square-icon bg-primary-dark-transparent-50 navigation-icon navigation-icon-mobile-only"
+                onclick="showSidebar('navigation');">
+                <span style="--icon-src: url('/images/bs-icons/bs-list-light.svg');"></span>
+            </span>
+        </div>
+    </div>
+    <div class="secondary-navbar d-flex flex-center flex-space-between">
+
+        <div class="d-flex flex-center search-widget">
+            <a class="square-icon square-icon-md" title="Tumblr" href="https://paninocode.tumblr.com"
+                target="_blank">
+                <span
+                    style="--icon-src: url('/images/bs-icons/bs-search-light.svg');"></span>
+            </a>
+            <p class="text-h5 text-line-height-0">
+                Search
+            </p>
+        </div>
+
+        <div class="d-flex flex-center">
+            <p class="text-line-height-0" id="follow_me_text">
+                Follow&nbsp;me:&nbsp;
+            </p>
+
+            <a class="square-icon icon-hover square-icon-md" title="Tumblr" href="https://paninocode.tumblr.com"
+                target="_blank">
+                <span
+                    style="--icon-src: url('/images/icons8/social-light/icons8-tumblr.svg'); --icon-hover-src: url('/images/icons8/social-color/icons8-tumblr.svg');"></span>
+            </a>
+            <!-- <a class="square-icon icon-hover square-icon-md" title="BlueSky" href="https://bsky.app/profile/panino.dev" target="_blank">
+                <span style="--icon-src: url('/images/bsky-icons/light.svg'); --icon-hover-src: url('/images/bsky-icons/color.svg');"></span>
+            </a> -->
+            <a class="square-icon icon-hover square-icon-md" title="Instagram" href="https://instagram.com/paninocode"
+                target="_blank">
+                <span
+                    style="--icon-src: url('/images/icons8/social-light/icons8-instagram.svg'); --icon-hover-src: url('/images/icons8/social-color/icons8-instagram.svg');"></span>
+            </a>
+            <a class="square-icon icon-hover square-icon-md" title="Youtube" href="https://youtube.com/@paninocode"
+                target="_blank">
+                <span
+                    style="--icon-src: url('/images/icons8/social-light/icons8-youtube.svg'); --icon-hover-src: url('/images/icons8/social-color/icons8-youtube.svg');"></span>
+            </a>
+            <a class="square-icon icon-hover square-icon-md" title="Linkedin"
+                href="https://linkedin.com/in/alexniccoloferrari">
+                <span
+                    style="--icon-src: url('/images/icons8/social-light/icons8-linkedin.svg'); --icon-hover-src: url('/images/icons8/social-color/icons8-linkedin.svg');"></span>
+            </a>
+            <a class="square-icon icon-hover square-icon-md" title="Github" href="https://github.com/paninocode"
+                target="_blank">
+                <span
+                    style="--icon-src: url('/images/icons8/social-light/icons8-github.svg'); --icon-hover-src: url('/images/icons8/social-color/icons8-github.svg');"></span>
+            </a>
+        </div>
+    </div>
+    <!-- <div class="tertiary-navbar">
+        <div class="dropdown-container d-flex flex-center flex-end">
+            <div id="dropdown_projects" class="dropdown-section dropdown-section-hidden">
+                <p class="dropdown-links">
+                    <a class="color-light" href="#">My p</a>
+                    <a class="color-light" href="#">Conta3ct Me</a>
+                    <a class="color-light" href="#">Credits</a>
+                </p>
+            </div>
+            <div id="dropdown_about" class="dropdown-section dropdown-section-hidden">
+                <p class="dropdown-links">
+                    <a class="color-light" href="#">My Resume</a>
+                    <a class="color-light" href="#">Contact Me</a>
+                    <a class="color-light" href="#">Credits</a>
+                </p>
+            </div>
+        </div>
+        <span style="width: 2rem;"></span>
+    </div> -->
+</nav>
+
+
+<div class="header-pulldown">
+    <div id="header_pulldown_btn">
+        <span class="square-icon square-icon-sm">
+            <span style="--icon-src: url('/images/bs-icons/bs-caret-down-fill.svg');"></span>
+        </span>
+        <p class="header-pulldown-title">
+            Panino.dev&nbsp;
+        </p>
+    </div>
+</div>
+
+<div class="noscript-alert">
+    <p class="text-center color-light">
+        <b>You have set your browser to refuse script execution!</b><br>
+        This website makes heavy use of JavaScript; Many features are not going to work without it, but you should be
+        able to read all the pages just fine.
+    </p>
+</div>
+
+<span class="square-icon bg-primary-light" id="back_to_top_btn">
+    <span style="--icon-src: url('/images/bs-icons/bs-caret-up-fill.svg');"></span>
+</span>

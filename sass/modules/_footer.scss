@@ -1,0 +1,19 @@
+.footer {
+    background-color: $primary;
+    color: $light;
+
+    padding: 2rem;
+
+    border-top: $primary-dark 1px solid;
+    box-shadow: 0 0 3px transparentize($dark, 0.5);
+
+    .neocities-badge {
+        span {
+            cursor: pointer;
+            width: 150px;
+            aspect-ratio: 200/59;
+            background: url("/images/neocities.png") no-repeat center;
+            background-size: contain;
+        }
+    }
+}

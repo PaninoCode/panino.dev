@@ -1,0 +1,73 @@
+<!--                                             
+
+            Hi welcome to my website!
+
+            If you are interested in seeing how everything
+            works behind the scenes you can check out
+            this repository:
+
+                https://github.com/paninoCode/paninoWeb
+            
+            
+            You can also follow this website on Neocities:
+            
+                https://neocities.org/site/paninodev
+
+            
+            
+            Check out my other site too! -> https://panino.fun
+
+
+            --------------------------------------------------
+
+            BUILD ID:   <?gen BUILD-ID ?>
+            BUILD TIME: <?gen BUILD-TIME ?>
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fake favicon, to avoid extra request to server -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel=stylesheet href="/css/base.css?bId=<?gen BUILD-ID ?>">
+    <title><?gen PAGE-TITLE ?></title>
+</head>
+
+<body class="bg-light" data-selected-lang="<?gen PAGE-LANG ?>">
+
+    <noscript>
+        <style>
+            .secondary-navbar {
+                position: initial;
+            }
+
+            .noscript-alert {
+                display: block;
+            }
+
+            #back_to_top_btn {
+                display: none;
+            }
+        </style>
+    </noscript>
+
+    <?gen PAGE-HEADER ?>
+    <?gen PAGE-SIDEBAR ?>
+
+    <main id="page_main" style="min-height: 100vh; transition: 350ms;">
+        <?gen PAGE-MAIN ?>
+    </main>
+
+    <?gen PAGE-FOOTER ?>
+
+    <script src="/scripts/pages/pageSwitcher.js?bId=<?gen BUILD-ID ?>" type="text/javascript"></script>
+    <script src="/scripts/components/scrollLogic.js?bId=<?gen BUILD-ID ?>" type="text/javascript"></script>
+    <script src="/scripts/components/sidebar.js?bId=<?gen BUILD-ID ?>" type="text/javascript"></script>
+    <script src="/scripts/components/accordion.js?bId=<?gen BUILD-ID ?>" type="text/javascript"></script>
+    <script src="/scripts/components/navbar.js?bId=<?gen BUILD-ID ?>" type="text/javascript"></script>
+</body>
+
+</html>

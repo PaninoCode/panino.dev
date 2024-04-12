@@ -1,0 +1,44 @@
+[
+    {
+        "id": "home",
+        "path": "/",
+        "aliases": ["/home"],
+        "structure": [
+            {
+                "id": "homepage_hero",
+                "animation": null
+            }
+        ],
+        "title": "Home",
+        "type": "normal",
+        "auth": "none"
+    },
+    {
+        "id": "about",
+        "path": "/about",
+        "aliases": null,
+        "structure": [
+            {
+                "id": "about_page",
+                "animation": null
+            }
+        ],
+        "title": "About Me",
+        "type": "normal",
+        "auth": "none"
+    },
+    {
+        "id": "not_found",
+        "path": "/not_found",
+        "aliases": null,
+        "structure": [
+            {
+                "id": "error_404",
+                "animation": null
+            }
+        ],
+        "title": "Error 404. Not Found.",
+        "type": "normal",
+        "auth": "none"
+    }
+]

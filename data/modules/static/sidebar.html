@@ -1,0 +1,91 @@
+<span class="sidebar-overlay" onclick="hideSidebar();"></span>
+
+<div class="sidebar">
+
+    <div class="sidebar-header">
+        <span style="width: 100%;"></span>
+        <span class="square-icon" onclick="hideSidebar();">
+            <span style="--icon-src: url('<?gen WEB-ROOT ?>/images/bs-icons/bs-x-lg.svg');"></span>
+        </span>
+    </div>
+
+    <div class="accordion-container accordion-flush" id="sidebar_section_navigation" data-accordion-group="sidebar">
+        <div class="accordion-header">
+            <p class="accordion-title text-h3">
+                Menu
+            </p>
+            <span class="square-icon accordion-header-icon">
+                <span class="accordion-header-icon-src"></span>
+            </span>
+        </div>
+        <div class="accordion-body">
+            <div class="sidebar-vertical-navigation d-flex flex-center flex-column">
+                <a href="<?gen WEB-ROOT ?>/about.html" class="navigation-item">
+                    About
+                </a>
+                <div class="navigation-item">
+                    <p>
+                        My Projects
+                    </p>
+                    <ul class="navigation-subitems">
+                        <li>
+                            <a class="color-light" href="#">Action</a>
+                        </li>
+                        <li>
+                            <a class="color-light" href="#">Another action</a>
+                        </li>
+                        <li>
+                            <a class="color-light" href="#">Something else here</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-container accordion-flush" id="sidebar_section_language" data-accordion-group="sidebar">
+        <div class="accordion-header">
+            <p class="accordion-title text-h3">
+                Language
+            </p>
+            <span class="square-icon accordion-header-icon">
+                <span class="accordion-header-icon-src"></span>
+            </span>
+        </div>
+        <div class="accordion-body">
+            <div style="padding: 1rem;" class="d-flex flex-row">
+                <button class="btn-primary language-select-btn" style="width: 45%;" data-lang-id="">
+                    🇬🇧 English
+                </button>
+                <span style="width: 10%;"></span>
+                <button class="btn-primary language-select-btn" style="width: 45%;" data-lang-id="it">
+                    🇮🇹 Italian
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-container accordion-flush" id="sidebar_section_settings" data-accordion-group="sidebar">
+        <div class="accordion-header">
+            <p class="accordion-title text-h3">
+                Settings
+            </p>
+            <span class="square-icon accordion-header-icon">
+                <span class="accordion-header-icon-src"></span>
+            </span>
+        </div>
+        <div class="accordion-body">
+            <div style="padding: 1rem;" class="d-flex flex-column">
+                <p class="text-h5 color-light">View Mode:</p>
+                <div class="d-flex flex-row">
+                    <button class="btn-light viewmode-select-btn" style="width: 45%;" data-mode="light">
+                        Light
+                    </button>
+                    <span style="width: 10%;"></span>
+                    <button class="btn-dark viewmode-select-btn" style="width: 45%;" data-mode="dark">
+                        Dark
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

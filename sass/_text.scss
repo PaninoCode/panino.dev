@@ -1,0 +1,156 @@
+h1 {
+    text-shadow: 0 0 3px transparentize($dark, 0.5);
+    font-family: 'Merriweather', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+h2 {
+    text-shadow: 0 0 3px transparentize($dark, 0.5);
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+h3 {
+    text-shadow: 0 0 3px transparentize($dark, 0.5);
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+}
+
+h4 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+}
+
+h5 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+h6 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+p, a {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+a {
+    color: darken($primary, 5);
+}
+
+dt {
+    @extend h3;
+}
+
+dd {
+    @extend p;
+}
+
+ol {
+    li {
+        @extend p;
+        counter-increment: li_counter;
+    }
+
+    list-style: none;
+    counter-reset: li_counter;
+
+    ::before {
+        content: counter(li_counter) ".";
+        color: transparentize($primary, 0.35); /* Change the color */
+        display: inline-block;
+        width: 1.2em;
+        margin-left: -1.2em;
+        transition: 300ms;
+    }
+
+    :hover::before {
+        color: $primary;
+    }
+
+}
+
+ul {
+    li {
+        @extend p;
+    }
+    
+    list-style: none;
+    
+
+    ::before {
+        content: "\2022";
+        color: transparentize($primary, 0.35); /* Change the color */
+        font-weight: bold;
+        display: inline-block;
+        width: 1.2em;
+        margin-left: -1.2em;
+        transition: 300ms;
+    }
+
+    :hover::before {
+        color: $primary;
+    }
+}
+
+label {
+    @extend p;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-h1 {
+    @extend h1;
+}
+
+.text-h2 {
+    @extend h2;
+}
+
+.text-h3 {
+    @extend h3;
+}
+
+.text-h4 {
+    @extend h4;
+}
+
+.text-h5 {
+    @extend h5;
+}
+
+.text-h6 {
+    @extend h6;
+}
+
+.text-p {
+    @extend p;
+}
+
+.text-a {
+    @extend a;
+}
+
+.text-sm {
+    @extend p;
+    font-size: 1.2rem;
+}
+
+.text-muted {
+    color: transparentize($dark, 0.5);
+}
+
+.text-line-height-0 {
+    line-height: 0;
+}

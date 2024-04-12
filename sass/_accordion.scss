@@ -1,0 +1,63 @@
+.accordion-container {
+    .accordion-header {
+        background-color: $primary-light;
+        border: $primary 1px solid;
+
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0.4rem 0.5rem 0.4rem 1rem;
+        border-radius: 0.25rem 0.25rem 0 0;
+        
+        .accordion-header-icon {
+            transition: 430ms;
+        }
+
+        .accordion-header-icon-src {
+            --icon-src: url('../images/bs-icons/bs-caret-down-fill.svg');
+        }
+
+        .accordion-title {
+            line-height: 0;
+        }
+    }
+
+    .accordion-body {
+        background-color: $secondary-light;
+
+        border: $secondary 1px solid;
+        border-radius: 0 0 0.25rem 0.25rem;
+    
+        padding: 0;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.2s ease-out;
+    
+    }
+}
+
+.accordion-flush {
+    .accordion-header {
+        border: none;
+        border-bottom: $primary-dark 1px solid;
+        border-radius: 0;
+    }
+
+    .accordion-body {
+        border: none;
+        border-radius: 0;
+    }
+}
+
+.accordion-open {
+
+    .accordion-header {
+        .accordion-header-icon {
+            transform: rotate(180deg);
+        }
+    }
+    
+}

@@ -1,0 +1,78 @@
+//* Brown Palette
+
+$burnt-umber: #893D26;
+$rose-taupe: #926571;
+$cherry-blossom-pink: #F4ACB7;
+$champagne-pink: #FFE5D9;
+$eerie-black: #172121;
+
+//* Green Palette
+
+$dark-moss-green: #274C00;
+$avocado: #517927;
+$asparagus: #7DAC4C;
+$honeydew: #F1FFE6;
+$dark-green: #00230A;
+
+//? Global color variables
+
+//* Load Green Palette
+$primary: $dark-moss-green;
+$secondary: $avocado;
+$tertiary: $asparagus;
+$light: $honeydew;
+$dark: $dark-green;
+
+$white: #FFFFFF;
+$black: #000000;
+
+$primary-dark: darken($primary, 10%);
+$primary-light: lighten($primary, 10%);
+$secondary-dark: darken($secondary, 10%);
+$secondary-light: lighten($secondary, 10%);
+$tertiary-dark: darken($tertiary, 10%);
+$tertiary-light: lighten($tertiary, 10%);
+$light-dark: darken($light, 10%);
+$light-light: lighten($light, 10%);
+$dark-dark: darken($dark, 10%);
+$dark-light: lighten($dark, 10%);
+
+$website-colors: 
+    "primary" $primary, 
+    "secondary" $secondary, 
+    "tertiary" $tertiary, 
+    "light" $light, 
+    "dark" $dark;
+
+$website-color-variants: "dark", "light";
+
+@each $color, $color-value in $website-colors {
+
+    .bg-#{$color} {
+        background: $color-value;
+    }
+
+    .bg-#{$color}-dark {
+        background: darken($color-value, 10%);
+    }
+
+    .bg-#{$color}-light {
+        background: lighten($color-value, 10%);
+    }
+
+    .bg-#{$color}-transparent-50 {
+        background: transparentize($color-value, 0.5);
+    }
+
+    .bg-#{$color}-dark-transparent-50 {
+        background: transparentize(darken($color-value, 10%), 0.5);
+    }
+
+    .bg-#{$color}-light-transparent-50 {
+        background: transparentize(lighten($color-value, 10%), 0.5);
+    }
+}
+
+//* Screen Breakpoints
+$tablet-breakpoint: 1035px;
+$mobile-breakpoint: 930px;

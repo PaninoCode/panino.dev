@@ -1,0 +1,75 @@
+/*
+
+    Stylesheet for https://panino.dev
+
+*/
+
+@import url('https://fonts.bunny.net/css?family=merriweather:400,700,900');
+@import url('https://fonts.bunny.net/css?family=roboto-slab:400,500');
+
+@import 'variables', 'text', 'modal', 'input', 'extra', 'table', 'icons', 'accordion';
+@import 'modules/header', 'modules/sidebar', 'modules/footer';
+// @import 'pages/home';
+
+// .body-demo-top {
+//     padding: 1rem;
+// }
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#contents {
+    min-height: 80vh;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-space-between {
+    justify-content: space-between;
+}
+
+.flex-space-around {
+    justify-content: space-around;
+}
+
+.flex-start {
+    justify-content: start;
+}
+
+.flex-end {
+    justify-content: end;
+}
+
+.flex-top {
+    justify-content: start;
+}
+
+.flex-bottom {
+    justify-content: end;
+}

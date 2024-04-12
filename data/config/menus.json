@@ -1,0 +1,23 @@
+[
+    {
+        "id": "navbar",
+        "items": [
+            {
+                "names": ["Blog"],
+                "links": ["/blog"]
+            },
+            {
+                "names": [
+                    "Test 1",
+                    "Test 2",
+                    "Test 3"
+                ],
+                "links": [
+                    "/test1",
+                    "/test2",
+                    "/test3"
+                ]
+            }
+        ]
+    }
+]

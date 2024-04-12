@@ -1,0 +1,31 @@
+table {
+    margin: 1rem;
+    border-spacing: 0;
+    border-collapse: collapse;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.500);
+    background-color: $secondary;
+}
+
+th {
+    @extend h3;
+    border-style: none;
+    font-weight: 500;
+    padding: 0.7rem;
+    text-align: center;
+    color: $light;
+    background-color: $primary;
+}
+
+td {
+    @extend p;
+    color: $light;
+}
+
+td, th {
+    border: 1px solid transparentize($dark, 0.55);
+    padding: 0.3rem;
+}
+
+table tr:nth-child(odd) td{
+    background-color: transparentize($light, 0.7);
+}

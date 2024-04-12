@@ -1,0 +1,117 @@
+// * Buttons
+
+button, .btn-element {
+    @extend p;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: 460ms;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.500);
+    cursor: pointer;
+
+    &:disabled {
+        opacity: 0.6;
+    }
+}
+
+.btn-primary {
+    color: $light;
+    background-color: $primary;
+    transition: 300ms;
+}
+
+.btn-primary:hover:enabled {
+    background-color: lighten($primary, 5%);
+}
+
+.btn-secondary {
+    color: $light;
+    background-color: $secondary;
+}
+
+.btn-secondary:hover:enabled {
+    background-color: darken($secondary, 5%);
+}
+
+.btn-tertiary {
+    color: $dark;
+    background-color: $tertiary;
+}
+
+.btn-tertiary:hover:enabled {
+    background-color: darken($tertiary, 5%);
+}
+
+.btn-light {
+    color: $dark;
+    background-color: $light;
+}
+
+.btn-light:hover:enabled {
+    background-color: darken($light, 5%);
+}
+
+.btn-dark {
+    color: $light;
+    background-color: $dark;
+}
+
+.btn-dark:hover:enabled {
+    background-color: lighten($dark, 5%);
+}
+
+// * Input
+
+input, textarea, select {
+    @extend p;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: solid 0.5px transparentize($dark, 0.8);
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.500);
+}
+
+.input-primary {
+    color: $light;
+    background-color: transparentize($primary, 0.2);
+}
+
+.input-secondary {
+    color: $light;
+    background-color: transparentize($secondary, 0.2);
+}
+
+.input-tertiary {
+    color: $dark;
+    background-color: transparentize($tertiary, 0.2);
+}
+
+.input-light {
+    color: $dark;
+    background-color: transparentize($light, 0.2);
+}
+
+.input-dark {
+    color: $light;
+    background-color: transparentize($dark, 0.2);
+}
+
+optgroup, option {
+    @extend p;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    accent-color: $primary;
+}
+
+input::file-selector-button {
+    @extend button;
+    background-color: transparentize($light, 0.75);
+    color: $light;
+    margin-right: 1rem;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.100);
+}
+
+.input-light::file-selector-button {
+    color: $dark;
+}

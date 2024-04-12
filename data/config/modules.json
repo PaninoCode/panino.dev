@@ -1,0 +1,26 @@
+[
+    {
+        "id": "homepage_hero",
+        "src": "home/hero.html",
+        "type": "normal",
+        "scripts": []
+    },
+    {
+        "id": "about_page",
+        "src": "home/about.html",
+        "type": "normal",
+        "scripts": ["/scripts/test.js"]
+    },
+    {
+        "id":"example1",
+        "src": "example1.html",
+        "type": "normal",
+        "scripts": []
+    },
+    {
+        "id":"error_404",
+        "src": "errors/404.html",
+        "type": "404_error",
+        "scripts": []
+    }
+]

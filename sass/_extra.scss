@@ -1,0 +1,46 @@
+.color-primary {
+    color: $primary;
+}
+
+.color-secondary {
+    color: $secondary;
+}
+
+.color-tertiary {
+    color: $tertiary;
+}
+
+.color-light {
+    color: $light;
+}
+
+.color-dark {
+    color: $dark;
+}
+
+.padding-0 {
+    padding: 0 !important;
+}
+
+.margin-0 {
+    margin: 0 !important;
+}
+
+.padding-1rem {
+    padding: 1rem !important;
+}
+
+.margin-1rem {
+    margin: 1rem !important;
+}
+
+.border-none {
+    border: none !important;
+}
+
+@mixin gradient($direction, $list) {
+    background: -webkit-linear-gradient($direction, $list);
+    background: -moz-linear-gradient($direction, $list);
+    background: -o-linear-gradient($direction, $list);
+    background: linear-gradient($direction, $list);
+}
