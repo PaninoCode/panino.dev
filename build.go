@@ -130,23 +130,25 @@ var sidebarHtml string
 //go:embed data/modules/static/footer.html
 var footerHtml string
 
-//go:embed base.html
+//go:embed data/base.html
 var baseHtml string
 
-/*
-If set to true page with path: "/posts"
-becomes "/posts/index.html" instead of "/posts.html"
-Useful if you want to hide the "".html" without using url rewriting
-*/
-// var useFolders = false
+//go:embed config.json
+var configJson string
 
-// Build path for website
-var buildPath = "/var/www/panino.dev/"
+type Config struct {
+	BuildPath string `json:"build_path"`
+	WebRoot   string `json:"web_root"`
+	SiteTitle string `json:"site_title"`
+}
 
-var webRoot = "https://panino.dev.test"
+var config Config
 
-// Base website title
-var siteTitle = "Panino.dev"
+var buildPath string
+
+var webRoot string
+
+var siteTitle string
 
 var reset = "\033[0m"
 
@@ -194,6 +196,12 @@ func main() {
 	json.Unmarshal([]byte(modulesJson), &modules)
 	json.Unmarshal([]byte(routesJson), &routes)
 	json.Unmarshal([]byte(localesJson), &locales)
+
+	json.Unmarshal([]byte(configJson), &config)
+
+	buildPath = config.BuildPath
+	webRoot = config.WebRoot
+	siteTitle = config.SiteTitle
 
 	fmt.Println(printInfo("\nBuilding " + siteTitle + " inside " + buildPath))
 
