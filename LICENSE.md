@@ -1,3 +1,5 @@
+# License information
+
 All the contents of the website are Copyrighted (C) Alex Niccolò Ferrari. All rights reserved; Except for:
 
 - The source code; [GNU GPLv3.0 License](https://github.com/paninoCode/paninoWeb/blob/main/LICENSE-GPLv3.md)
