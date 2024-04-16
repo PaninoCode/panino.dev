@@ -31,8 +31,8 @@ type PageStructure struct {
 	#################### REDIRECTS ####################
 */
 
-//go:embed data/config/redirects.json
-var redirectsJson string
+// //go:embed data/config/redirects.json
+// var redirectsJson string
 
 type Redirect struct {
 	Path   string `json:"path"`
@@ -45,8 +45,8 @@ var redirects []Redirect
 	#################### ERROR PAGES ####################
 */
 
-//go:embed data/config/errorPages.json
-var errorPagesJson string
+// //go:embed data/config/errorPages.json
+// var errorPagesJson string
 
 type ErrorPage struct {
 	Id        string          `json:"id"`
@@ -63,8 +63,8 @@ var errorPages []ErrorPage
 	#################### MODULES ####################
 */
 
-//go:embed data/config/modules.json
-var modulesJson string
+// //go:embed data/config/modules.json
+// var modulesJson string
 
 type Module struct {
 	Id      string   `json:"id"`
@@ -79,8 +79,8 @@ var modules []Module
 	#################### ROUTES ####################
 */
 
-//go:embed data/config/routes.json
-var routesJson string
+// //go:embed data/config/routes.json
+// var routesJson string
 
 type Route struct {
 	Id        string          `json:"id"`
@@ -108,8 +108,8 @@ type ExportedPage struct {
 	#################### LOCALES ####################
 */
 
-//go:embed data/config/locales.json
-var localesJson string
+// //go:embed data/config/locales.json
+// var localesJson string
 
 type Locale struct {
 	Id   string `json:"id"`
@@ -122,22 +122,20 @@ var locales []Locale
 	#################### STATIC MODULES ####################
 */
 
-//go:embed data/modules/static/header.html
 var headerHtml string
-
-//go:embed data/modules/static/sidebar.html
 var sidebarHtml string
-
-//go:embed data/modules/static/footer.html
 var footerHtml string
-
-//go:embed data/base.html
 var baseHtml string
+
+/*
+	#################### CONFIG ####################
+*/
 
 //go:embed config.json
 var configJson string
 
 type Config struct {
+	DataPath             string `json:"data_path"`
 	BuildPath            string `json:"build_path"`
 	WebRoot              string `json:"web_root"`
 	SiteTitle            string `json:"site_title"`
@@ -146,12 +144,6 @@ type Config struct {
 }
 
 var config Config
-
-var BuildPath string
-
-var WebRoot string
-
-var SiteTitle string
 
 var reset = "\033[0m"
 
@@ -193,14 +185,20 @@ var buildTime = time.Now().Format(time.RFC850)
 
 func main() {
 
-	// Decode all the Json files
-	json.Unmarshal([]byte(redirectsJson), &redirects)
-	json.Unmarshal([]byte(errorPagesJson), &errorPages)
-	json.Unmarshal([]byte(modulesJson), &modules)
-	json.Unmarshal([]byte(routesJson), &routes)
-	json.Unmarshal([]byte(localesJson), &locales)
-
 	json.Unmarshal([]byte(configJson), &config)
+
+	// Decode all the Json files
+	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/redirects.json"))), &redirects)
+	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/errorPages.json"))), &errorPages)
+	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/modules.json"))), &modules)
+	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/routes.json"))), &routes)
+	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/locales.json"))), &locales)
+
+	// Static Modules
+	headerHtml = ReadFile(path.Join(config.DataPath, "/modules/static/header.html"))
+	sidebarHtml = ReadFile(path.Join(config.DataPath, "/modules/static/sidebar.html"))
+	footerHtml = ReadFile(path.Join(config.DataPath, "/modules/static/footer.html"))
+	baseHtml = ReadFile(path.Join(config.DataPath, "/base.html"))
 
 	fmt.Println(printInfo("\nBuilding " + config.SiteTitle + " inside " + config.BuildPath))
 
@@ -252,7 +250,7 @@ func main() {
 
 	for _, folderToCopy := range foldersToCopy {
 
-		var sourceFolder = path.Join("data/", folderToCopy+"/")
+		var sourceFolder = path.Join(config.DataPath, folderToCopy+"/")
 		var destinationFolder = path.Join(config.BuildPath, folderToCopy+"/")
 
 		fmt.Println(printInfo("Copying folder: [" + sourceFolder + "] into path: [" + destinationFolder + "]"))
@@ -308,15 +306,9 @@ func GeneratePage(route Route, locale Locale) {
 					if module.Id == routeModule.ModuleId {
 						// open the module file
 
-						var moduleSrc = path.Join("data/modules/", module.Src)
+						var moduleSrc = path.Join(config.DataPath, "/modules/", module.Src)
 
-						fileData, err := os.ReadFile(moduleSrc)
-						if err != nil {
-							fmt.Println(printError("Error reading file [" + moduleSrc + "] \n\t\t" + err.Error()))
-							moduleHtml = "<h1>[ERROR] " + err.Error() + "</h1>"
-						} else {
-							moduleHtml = string(fileData)
-						}
+						moduleHtml = ReadFile(moduleSrc)
 
 						for _, script := range module.Scripts {
 
@@ -395,6 +387,18 @@ func CreateFile(filePath string, fileContents string) {
 		fmt.Println(printError("Error writing file [" + filePath + "] \n\t\t" + err.Error()))
 	} else {
 		fmt.Println(printSuccess("File [" + filePath + "] created successfully"))
+	}
+}
+
+func ReadFile(filePath string) string {
+	fmt.Println(printInfo("Reading file: [" + filePath + "]"))
+
+	fileData, err := os.ReadFile(filePath)
+	if err != nil {
+		fmt.Println(printError("Error reading file [" + filePath + "] \n\t\t" + err.Error()))
+		return ""
+	} else {
+		return string(fileData)
 	}
 }
 

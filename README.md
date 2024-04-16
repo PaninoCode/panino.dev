@@ -20,6 +20,7 @@ Anyway, setting up the code building locally is extremely straightforward: Just 
 
 ```json
 {
+    "data_path": "path/to/data",
     "build_path": "/path/to/build",
     "web_root": "http://localhost",
     "site_title": "Title",
