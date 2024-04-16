@@ -141,16 +141,17 @@ type Config struct {
 	BuildPath            string `json:"build_path"`
 	WebRoot              string `json:"web_root"`
 	SiteTitle            string `json:"site_title"`
+	SiteTitleSeparator   string `json:"site_title_separator"`
 	ReplaceFileExtension bool   `json:"replace_file_extension"`
 }
 
 var config Config
 
-var buildPath string
+var BuildPath string
 
-var webRoot string
+var WebRoot string
 
-var siteTitle string
+var SiteTitle string
 
 var reset = "\033[0m"
 
@@ -201,21 +202,17 @@ func main() {
 
 	json.Unmarshal([]byte(configJson), &config)
 
-	buildPath = config.BuildPath
-	webRoot = config.WebRoot
-	siteTitle = config.SiteTitle
-
-	fmt.Println(printInfo("\nBuilding " + siteTitle + " inside " + buildPath))
+	fmt.Println(printInfo("\nBuilding " + config.SiteTitle + " inside " + config.BuildPath))
 
 	// Remove old directory
-	os.RemoveAll(buildPath)
+	os.RemoveAll(config.BuildPath)
 
 	// Try and create directory
-	os.Mkdir(buildPath, os.ModePerm)
+	os.Mkdir(config.BuildPath, os.ModePerm)
 
 	// Directory check
-	var directoryCheck = "Directory: [" + buildPath + "]"
-	if _, err := os.Stat(buildPath); !os.IsNotExist(err) {
+	var directoryCheck = "Directory: [" + config.BuildPath + "]"
+	if _, err := os.Stat(config.BuildPath); !os.IsNotExist(err) {
 		// Directory is valid, we can proceed
 		fmt.Println(printSuccess(directoryCheck + " is Valid."))
 	} else {
@@ -246,7 +243,7 @@ func main() {
 
 		var redirectHtml = "<script>window.location.replace(\"" + redirect.Target + "\");</script><p>You are being redirected, if you still see this page after a white <a href=\"" + redirect.Target + "\">click here</a>.</p>"
 
-		CreateFile(path.Join(buildPath, strings.TrimPrefix(redirect.Path, "/")+".html"), redirectHtml)
+		CreateFile(path.Join(config.BuildPath, strings.TrimPrefix(redirect.Path, "/")+".html"), redirectHtml)
 
 	}
 
@@ -256,7 +253,7 @@ func main() {
 	for _, folderToCopy := range foldersToCopy {
 
 		var sourceFolder = path.Join("data/", folderToCopy+"/")
-		var destinationFolder = path.Join(buildPath, folderToCopy+"/")
+		var destinationFolder = path.Join(config.BuildPath, folderToCopy+"/")
 
 		fmt.Println(printInfo("Copying folder: [" + sourceFolder + "] into path: [" + destinationFolder + "]"))
 
@@ -279,7 +276,7 @@ func GeneratePage(route Route, locale Locale) {
 	var localeFolder = strings.Replace(localePath, "/", "", -1)
 
 	if localeFolder != "" {
-		os.Mkdir(path.Join(buildPath, localeFolder), os.ModePerm)
+		os.Mkdir(path.Join(config.BuildPath, localeFolder), os.ModePerm)
 	}
 
 	fmt.Println(printInfo("Generating page: [" + route.Id + "] With path: \"" + route.Path + "\""))
@@ -298,7 +295,7 @@ func GeneratePage(route Route, locale Locale) {
 		case "<?gen PAGE-REPLACE-EXTENSION ?>":
 			newString = strconv.FormatBool(config.ReplaceFileExtension)
 		case "<?gen PAGE-TITLE ?>":
-			newString = route.Title + " @ " + siteTitle
+			newString = route.Title + " " + config.SiteTitleSeparator + " " + config.SiteTitle
 		case "<?gen PAGE-HEADER ?>":
 			newString = headerHtml
 		case "<?gen PAGE-SIDEBAR ?>":
@@ -356,8 +353,8 @@ func GeneratePage(route Route, locale Locale) {
 
 	var pageRouteObj ExportedPage
 
-	pageRouteObj.Html = strings.Replace(mainHtml, "<?gen WEB-ROOT ?>", webRoot+localePath, -1)
-	pageRouteObj.Title = route.Title + " @ " + siteTitle
+	pageRouteObj.Html = strings.Replace(mainHtml, "<?gen WEB-ROOT ?>", config.WebRoot+localePath, -1)
+	pageRouteObj.Title = route.Title + " " + config.SiteTitleSeparator + " " + config.SiteTitle
 	pageRouteObj.Scripts = mainScripts
 
 	for index, script := range pageRouteObj.Scripts {
@@ -369,11 +366,11 @@ func GeneratePage(route Route, locale Locale) {
 		panic(err)
 	}
 
-	pageHtml = strings.Replace(pageHtml, "<?gen WEB-ROOT ?>", webRoot+localePath, -1)
+	pageHtml = strings.Replace(pageHtml, "<?gen WEB-ROOT ?>", config.WebRoot+localePath, -1)
 
-	CreateFile(path.Join(buildPath, localeFolder, newFileName+".html"), pageHtml)
-	//CreateFile(path.Join(buildPath, newFileName+".content.txt"), mainHtml)
-	CreateFile(path.Join(buildPath, localeFolder, newFileName+".json"), string(pageRouteJson))
+	CreateFile(path.Join(config.BuildPath, localeFolder, newFileName+".html"), pageHtml)
+	//CreateFile(path.Join(config.BuildPath, newFileName+".content.txt"), mainHtml)
+	CreateFile(path.Join(config.BuildPath, localeFolder, newFileName+".json"), string(pageRouteJson))
 
 	// Write aliases
 
@@ -381,9 +378,9 @@ func GeneratePage(route Route, locale Locale) {
 		for _, alias := range route.Aliases {
 			fmt.Println(printInfo("Generating Alias: [" + alias + "]"))
 
-			CreateFile(path.Join(buildPath, localeFolder, strings.TrimPrefix(alias, "/")+".html"), pageHtml)
-			//CreateFile(path.Join(buildPath, strings.TrimPrefix(alias, "/")+".content."), mainHtml)
-			CreateFile(path.Join(buildPath, localeFolder, strings.TrimPrefix(alias, "/")+".json"), string(pageRouteJson))
+			CreateFile(path.Join(config.BuildPath, localeFolder, strings.TrimPrefix(alias, "/")+".html"), pageHtml)
+			//CreateFile(path.Join(config.BuildPath, strings.TrimPrefix(alias, "/")+".content."), mainHtml)
+			CreateFile(path.Join(config.BuildPath, localeFolder, strings.TrimPrefix(alias, "/")+".json"), string(pageRouteJson))
 
 		}
 	}
