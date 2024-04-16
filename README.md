@@ -16,7 +16,9 @@ And also because I needed an excuse to try using Go in a project.
 
 If you want you can try to use this project to build your own website, but I don't suggest you do, a better option would be to use something like Hugo or 11ty.
 
-Anyway, setting up the code building locally is extremely straightforward: Just clone this repo, create a config.json file in the repository root with this inside:
+Anyway, setting up the code building locally is extremely straightforward: 
+
+- Clone this repo, create a config.json file in the repository root with this inside:
 
 ```json
 {
@@ -29,7 +31,13 @@ Anyway, setting up the code building locally is extremely straightforward: Just 
 }
 ```
 
-and then launch either shell script (or use `go run build.go`) to start the build. It should take no more than a few seconds.
+- Build the stylesheets using Sass
+
+```
+    $ cd /data/panino.dev
+    $ sass sass/:css/
+```
+- Launch either `build.go` or `watch.sh` (or use `go run build.go`) to start the build. It should take no more than a few seconds.
 
 ## Contributing
 
