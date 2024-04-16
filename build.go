@@ -17,6 +17,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -137,9 +138,10 @@ var baseHtml string
 var configJson string
 
 type Config struct {
-	BuildPath string `json:"build_path"`
-	WebRoot   string `json:"web_root"`
-	SiteTitle string `json:"site_title"`
+	BuildPath            string `json:"build_path"`
+	WebRoot              string `json:"web_root"`
+	SiteTitle            string `json:"site_title"`
+	ReplaceFileExtension bool   `json:"replace_file_extension"`
 }
 
 var config Config
@@ -286,13 +288,15 @@ func GeneratePage(route Route, locale Locale) {
 	var mainScripts []string
 	var mainHtml string
 
-	var oldStrings = []string{"<?gen PAGE-LANG ?>", "<?gen PAGE-TITLE ?>", "<?gen PAGE-HEADER ?>", "<?gen PAGE-SIDEBAR ?>", "<?gen PAGE-MAIN ?>", "<?gen PAGE-FOOTER ?>", "<?gen BUILD-ID ?>", "<?gen BUILD-TIME ?>"}
+	var oldStrings = []string{"<?gen PAGE-LANG ?>", "<?gen PAGE-REPLACE-EXTENSION ?>", "<?gen PAGE-TITLE ?>", "<?gen PAGE-HEADER ?>", "<?gen PAGE-SIDEBAR ?>", "<?gen PAGE-MAIN ?>", "<?gen PAGE-FOOTER ?>", "<?gen BUILD-ID ?>", "<?gen BUILD-TIME ?>"}
 
 	for _, oldString := range oldStrings {
 		var newString string
 		switch oldString {
 		case "<?gen PAGE-LANG ?>":
 			newString = localeFolder
+		case "<?gen PAGE-REPLACE-EXTENSION ?>":
+			newString = strconv.FormatBool(config.ReplaceFileExtension)
 		case "<?gen PAGE-TITLE ?>":
 			newString = route.Title + " @ " + siteTitle
 		case "<?gen PAGE-HEADER ?>":

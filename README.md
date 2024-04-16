@@ -22,7 +22,8 @@ Anyway, setting up the code building locally is extremely straightforward: Just 
 {
     "build_path": "/path/to/build",
     "web_root": "http://localhost",
-    "site_title": "Title"
+    "site_title": "Title",
+    "replace_file_extension": false
 }
 ```
 

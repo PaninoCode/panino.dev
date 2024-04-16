@@ -9,7 +9,7 @@
         "id": "about_page",
         "src": "home/about.html",
         "type": "normal",
-        "scripts": ["/scripts/test.js"]
+        "scripts": []
     },
     {
         "id":"example1",

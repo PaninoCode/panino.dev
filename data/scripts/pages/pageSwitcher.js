@@ -27,7 +27,15 @@ function CheckAllLinks(selector) {
                 if (url.origin == window.origin && eve.target.getAttribute("target") != "_blank") {
                     eve.preventDefault();
                     const stateObj = {};
-                    history.pushState(stateObj, "", url.pathname);
+
+                    let newPathName = url.pathname
+                    if(document.body.getAttribute('data-replace-file-extension') == "true"){
+                        newPathName = newPathName.replace('.html', '');
+                    }
+
+                    if(newPathName != window.location.pathname){
+                        history.pushState(stateObj, "", newPathName);
+                    }
                 }
             }
         });
