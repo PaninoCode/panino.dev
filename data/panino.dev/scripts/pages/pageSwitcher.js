@@ -42,28 +42,9 @@ function CheckAllLinks(selector) {
     });
 }
 
-/*
-
-if (url.origin != window.origin && externalWarning) {
-                    let text = "This link points to an external website.\nDo you wish to continue?";
-                    if (confirm(text) == true) {
-                        //nothing
-                    } else {
-                        eve.preventDefault();
-                    }
-                } else 
-
-*/
-
 function pathNamePolling() { //checking if the pathname changes
     if (pagePathName != window.location.pathname) {
         pagePathName = window.location.pathname;
-        //console.log("pathname has changed to: " + pagePathName + ", running switching function.");
-
-        // console.log('Initially ' + (window.navigator.onLine ? 'on' : 'off') + 'line');
-
-        // window.addEventListener('online', () => console.log('Became online'));
-        // window.addEventListener('offline', () => console.log('Became offline'));
 
         if (window.navigator.onLine == false) {
             alert("You are offline!");

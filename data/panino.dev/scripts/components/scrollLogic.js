@@ -1,37 +1,3 @@
-// document.addEventListener('scroll', toggleMenu, false);
-// document.addEventListener('DOMContentLoaded', toggleMenu, false);
-// window.addEventListener('contentsLoaded', toggleMenu, false);
-
-// function toggleMenu() {
-//     let heroHeight = null;
-//     let primaryNavigationHeight = document.querySelector('.primary-navigation').offsetHeight;
-//     let secondaryNavigationHeight = document.querySelector('.secondary-navigation').offsetHeight;
-//     let secondaryNavigation = document.querySelector('.secondary-navigation');
-//     let brandingTitle = document.querySelector('.branding-title');
-//     let headerMargin = document.querySelector('#header_margin');
-
-//     try{
-//         heroHeight = document.querySelector('.welcome-hero').offsetHeight;
-//         headerMargin.style.height = '0px';
-//     }catch(e){
-//         secondaryNavigation.style.top = primaryNavigationHeight + 'px';
-//         brandingTitle.style.left = '0px';
-//         headerMargin.style.height = secondaryNavigationHeight + 10 + 'px';
-//     }
-
-//     let triggerHeight = heroHeight;
-
-//     if (window.scrollY >= triggerHeight - 10){
-//         secondaryNavigation.style.top = primaryNavigationHeight + 'px';
-//         brandingTitle.style.left = '0px';
-//     }
-
-//     if (window.scrollY < triggerHeight - 10){
-//         secondaryNavigation.style.top = '-2rem';
-//         brandingTitle.style.left = '-30rem';
-//     }
-// }
-
 document.addEventListener('contentsLoaded', e => {
     toggleSecondaryNavbar();
 });

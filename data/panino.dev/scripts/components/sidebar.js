@@ -71,21 +71,3 @@ function fadeOut(el, time) {
 
     tick();
 }
-
-// let touchstartX = 0
-// let touchendX = 0
-
-// document.addEventListener('touchstart', e => {
-//   touchstartX = e.changedTouches[0].pageX
-//   console.log('b: ' + touchstartX);
-// })
-
-// document.addEventListener('touchmove', e => {
-//     console.log('m: ' + e.changedTouches[0].pageX);
-// })
-
-// document.addEventListener('touchend', e => {
-//   touchendX = e.changedTouches[0].pageX
-//   console.log('e: '+ touchendX);
-// //   checkDirection()
-// })
