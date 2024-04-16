@@ -1,6 +1,6 @@
 # PaninoWeb
 
-My [website](https://panino.dev), built with a custom static site generator.
+My <a href="https://panino.dev" target="_blank">website</a>, built with a custom static site generator.
 
 Most of the heavy lifting happens inside the `build.go` file, the `watch.sh` is used simply to watch file file changes and automatically rebuild (it's a temporary solution, one day I will code this feature directly inside the main Go script)
 
@@ -33,4 +33,4 @@ and then launch either shell script (or use `go run build.go`) to start the buil
 
 ## Contributing
 
-I'm not really looking for help with coding right now, but if you like what I'm making you are welcome to support me through my [Ko-fi page](https://ko-fi.com/PaninoCode) or [Neocities profile](https://neocities.org/site/paninodev)
+I'm not really looking for help with coding right now, but if you like what I'm making you are welcome to support me through my <a href="https://ko-fi.com/PaninoCode" target="_blank">Ko-fi page</a> or <a href="https://neocities.org/site/paninodev" target="_blank">Neocities profile</a>
