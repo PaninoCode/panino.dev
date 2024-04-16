@@ -37,7 +37,13 @@ Anyway, setting up the code building locally is extremely straightforward:
     $ cd /data/panino.dev
     $ sass sass/:css/
 ```
-- Launch either `build.go` or `watch.sh` (or use `go run build.go`) to start the build. It should take no more than a few seconds.
+- Launch the build with any of these commands:
+- 
+```
+    $ ./build.sh config.json
+    $ go run build.go config.json
+```
+
 
 ## Contributing
 

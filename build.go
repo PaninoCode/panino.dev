@@ -131,8 +131,8 @@ var baseHtml string
 	#################### CONFIG ####################
 */
 
-//go:embed config.json
-var configJson string
+// //go:embed config.json
+// var configJson string
 
 type Config struct {
 	DataPath             string `json:"data_path"`
@@ -185,7 +185,13 @@ var buildTime = time.Now().Format(time.RFC850)
 
 func main() {
 
-	json.Unmarshal([]byte(configJson), &config)
+	//	Manage no args. case
+	if len(os.Args) != 2 {
+		fmt.Println(printError("Missing argument: Config file."))
+		return
+	}
+
+	json.Unmarshal([]byte(ReadFile(os.Args[1])), &config)
 
 	// Decode all the Json files
 	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/redirects.json"))), &redirects)

@@ -1,7 +1,7 @@
 #!/bin/bash
  
 DIR_TO_WATCH="data"
-COMMAND="sudo go run build.go"
+COMMAND="sudo go run build.go $1"
  
 trap "echo Exited!; exit;" SIGINT SIGTERM
 while [[ 1=1 ]]

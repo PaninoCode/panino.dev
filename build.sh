@@ -1,3 +1,3 @@
 #!/bin/bash
  
-sudo go run build.go
+sudo go run build.go $1
