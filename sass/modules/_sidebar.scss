@@ -52,24 +52,35 @@
         box-shadow: 0 0 3px transparentize($dark, 0.5);
         cursor: pointer;
         color: $light;
-        text-decoration: none;
+
+        .navigation-subitems-title {
+            cursor: initial;
+        }
 
         .navigation-subitems {
+
+            padding: 0.5rem 0 0.5rem 1rem;
+            background-color: $secondary;
+            margin: 0.5rem 0 0 0;
+            border-radius: 0.25rem;
+            border: $primary-dark 1px solid;
+            box-shadow: 0 0 3px transparentize($dark, 0.5);
+
             ::before {
                 content: "";
                 width: 0 !important;
                 padding: 0 !important;
                 margin: 0 !important;
             }
-
-            li a {
-                text-decoration: none;
-            }
         }
 
         p {
             margin: 0 !important;
         }
+    }
+
+    a {
+        text-decoration-color: transparentize($light, 0.7);
     }
 }
 

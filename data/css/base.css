@@ -803,7 +803,17 @@ table tr:nth-child(odd) td {
   box-shadow: 0 0 3px rgba(0, 35, 10, 0.5);
   cursor: pointer;
   color: #F1FFE6;
-  text-decoration: none;
+}
+.sidebar-vertical-navigation .navigation-item .navigation-subitems-title {
+  cursor: initial;
+}
+.sidebar-vertical-navigation .navigation-item .navigation-subitems {
+  padding: 0.5rem 0 0.5rem 1rem;
+  background-color: #517927;
+  margin: 0.5rem 0 0 0;
+  border-radius: 0.25rem;
+  border: #0d1900 1px solid;
+  box-shadow: 0 0 3px rgba(0, 35, 10, 0.5);
 }
 .sidebar-vertical-navigation .navigation-item .navigation-subitems ::before {
   content: "";
@@ -811,11 +821,11 @@ table tr:nth-child(odd) td {
   padding: 0 !important;
   margin: 0 !important;
 }
-.sidebar-vertical-navigation .navigation-item .navigation-subitems li a, .sidebar-vertical-navigation .navigation-item .navigation-subitems li .text-a {
-  text-decoration: none;
-}
 .sidebar-vertical-navigation .navigation-item p, .sidebar-vertical-navigation .navigation-item dd, .sidebar-vertical-navigation .navigation-item ol li, ol .sidebar-vertical-navigation .navigation-item li, .sidebar-vertical-navigation .navigation-item ul li, ul .sidebar-vertical-navigation .navigation-item li, .sidebar-vertical-navigation .navigation-item label, .sidebar-vertical-navigation .navigation-item .text-p, .sidebar-vertical-navigation .navigation-item .text-sm, .sidebar-vertical-navigation .navigation-item button, .sidebar-vertical-navigation .navigation-item .btn-element, .sidebar-vertical-navigation .navigation-item input, .sidebar-vertical-navigation .navigation-item textarea, .sidebar-vertical-navigation .navigation-item select, .sidebar-vertical-navigation .navigation-item optgroup, .sidebar-vertical-navigation .navigation-item option, .sidebar-vertical-navigation .navigation-item input::file-selector-button, .sidebar-vertical-navigation .navigation-item td {
   margin: 0 !important;
+}
+.sidebar-vertical-navigation a, .sidebar-vertical-navigation .text-a {
+  text-decoration-color: rgba(241, 255, 230, 0.3);
 }
 
 .sidebar-overlay-show {
