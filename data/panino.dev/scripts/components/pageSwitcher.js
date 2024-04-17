@@ -90,28 +90,6 @@ function Switcher() {
 
 }
 
-document.querySelectorAll('.language-select-btn').forEach(elem => {
-
-    if(elem.getAttribute('data-lang-id') == document.body.getAttribute('data-selected-lang')){
-        elem.disabled = true;
-        return;
-    }
-
-    elem.addEventListener('click', function (e) {
-        let id = elem.getAttribute('data-lang-id');
-
-        let pathNameS = window.location.pathname.substring(1).split("/");
-
-        if (pathNameS[0] != id && (pathNameS[0] == "" || pathNameS[0] == "it")) {
-            pathNameS[0] = id;
-            location.href = pathNameS.join("/");
-        } else if (pathNameS[0] != id) {
-            pathNameS.unshift(id);
-            location.href = pathNameS.join("/");
-        }
-    });
-});
-
 function HttpRequest(src, disableCaching, callback) {
     let httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", src, true);

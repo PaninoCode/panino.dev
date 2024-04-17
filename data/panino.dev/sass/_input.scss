@@ -10,6 +10,7 @@ button, .btn-element {
     cursor: pointer;
 
     &:disabled {
+        cursor: initial;
         opacity: 0.6;
     }
 }
