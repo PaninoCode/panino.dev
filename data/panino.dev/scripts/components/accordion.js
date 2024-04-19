@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', e => {
         let accordionBody = accordion.querySelectorAll('.accordion-body')[0];
 
         accordionHeader.addEventListener('click', e => {
-            toggleAccordionGroup(e.target.parentElement);
+            toggleAccordionGroup(e.currentTarget.parentElement);
             accordion.classList.toggle('accordion-open');
             if(accordion.classList.contains('accordion-open')){
                 accordionBody.style.maxHeight = accordionBody.scrollHeight + 'px';
