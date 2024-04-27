@@ -395,6 +395,13 @@ func GetMultiLanguageText(MLElems []MultiLanguageText, langId string) string {
 func CreateFile(filePath string, fileContents string) {
 	fmt.Println(printInfo("Writing file: [" + filePath + "] into filesystem"))
 
+	var fileDir = filepath.Dir(filePath)
+
+	if _, err := os.Stat(fileDir); os.IsNotExist(err) {
+		fmt.Println(printInfo("Directory: [" + fileDir + "] does not exist, creating."))
+		os.MkdirAll(fileDir, 0644) // Create your file
+	}
+
 	err := os.WriteFile(filePath, []byte(fileContents), 0644)
 	if err != nil {
 		fmt.Println(printError("Error writing file [" + filePath + "] \n\t\t" + err.Error()))
