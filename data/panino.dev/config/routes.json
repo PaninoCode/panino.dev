@@ -43,8 +43,8 @@
     },
     {
         "id": "not_found",
-        "path": "/not_found",
-        "aliases": null,
+        "path": "/errors/404",
+        "aliases": ["/not_found"],
         "structure": [
             {
                 "id": "error_404",
