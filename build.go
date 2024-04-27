@@ -48,24 +48,6 @@ type Redirect struct {
 var redirects []Redirect
 
 /*
-	#################### ERROR PAGES ####################
-*/
-
-// //go:embed data/config/errorPages.json
-// var errorPagesJson string
-
-type ErrorPage struct {
-	Id        string              `json:"id"`
-	ErrorCode string              `json:"error_code"`
-	Structure []PageStructure     `json:"structure"`
-	Title     []MultiLanguageText `json:"title"`
-	Type      string              `json:"type"` //currently not used
-	Auth      string              `json:"auth"` //currently not used
-}
-
-var errorPages []ErrorPage
-
-/*
 	#################### MODULES ####################
 */
 
@@ -201,7 +183,6 @@ func main() {
 
 	// Decode all the Json files
 	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/redirects.json"))), &redirects)
-	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/errorPages.json"))), &errorPages)
 	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/modules.json"))), &modules)
 	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/routes.json"))), &routes)
 	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/locales.json"))), &locales)
