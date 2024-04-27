@@ -21,6 +21,6 @@
         "id":"error_404",
         "src": "errors/404.html",
         "type": "404_error",
-        "scripts": []
+        "scripts": ["/scripts/pages/error/404.js"]
     }
 ]
