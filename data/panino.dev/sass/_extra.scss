@@ -38,6 +38,10 @@
     border: none !important;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 @mixin gradient($direction, $list) {
     background: -webkit-linear-gradient($direction, $list);
     background: -moz-linear-gradient($direction, $list);
