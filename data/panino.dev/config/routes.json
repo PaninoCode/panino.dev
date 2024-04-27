@@ -9,7 +9,12 @@
                 "animation": null
             }
         ],
-        "title": "Home",
+        "title": [
+            {
+                "lang_id": "_any",
+                "text": "Home"
+            }
+        ],
         "type": "normal",
         "auth": "none"
     },
@@ -23,7 +28,16 @@
                 "animation": null
             }
         ],
-        "title": "About Me",
+        "title": [
+            {
+                "lang_id": "en",
+                "text": "About me"
+            },
+            {
+                "lang_id": "it",
+                "text": "Su di me"
+            }
+        ],
         "type": "normal",
         "auth": "none"
     },
@@ -37,7 +51,16 @@
                 "animation": null
             }
         ],
-        "title": "Error 404. Not Found.",
+        "title": [
+            {
+                "lang_id": "en",
+                "text": "Error 404. Not Found."
+            },
+            {
+                "lang_id": "it",
+                "text": "Errore 404. Non Trovato."
+            }
+        ],
         "type": "normal",
         "auth": "none"
     }

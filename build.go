@@ -17,6 +17,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -25,6 +26,11 @@ import (
 type PageStructure struct {
 	ModuleId  string `json:"id"`
 	Animation string `json:"animation"` // ignored for now.. should not be string
+}
+
+type MultiLanguageText struct {
+	Id   string `json:"lang_id"`
+	Text string `json:"text"`
 }
 
 /*
@@ -49,12 +55,12 @@ var redirects []Redirect
 // var errorPagesJson string
 
 type ErrorPage struct {
-	Id        string          `json:"id"`
-	ErrorCode string          `json:"error_code"`
-	Structure []PageStructure `json:"structure"`
-	Title     string          `json:"title"`
-	Type      string          `json:"type"` //currently not used
-	Auth      string          `json:"auth"` //currently not used
+	Id        string              `json:"id"`
+	ErrorCode string              `json:"error_code"`
+	Structure []PageStructure     `json:"structure"`
+	Title     []MultiLanguageText `json:"title"`
+	Type      string              `json:"type"` //currently not used
+	Auth      string              `json:"auth"` //currently not used
 }
 
 var errorPages []ErrorPage
@@ -83,13 +89,13 @@ var modules []Module
 // var routesJson string
 
 type Route struct {
-	Id        string          `json:"id"`
-	Path      string          `json:"path"`
-	Aliases   []string        `json:"aliases"`
-	Structure []PageStructure `json:"structure"`
-	Title     string          `json:"title"`
-	Type      string          `json:"type"` //currently not used
-	Auth      string          `json:"auth"` //currently not used
+	Id        string              `json:"id"`
+	Path      string              `json:"path"`
+	Aliases   []string            `json:"aliases"`
+	Structure []PageStructure     `json:"structure"`
+	Title     []MultiLanguageText `json:"title"`
+	Type      string              `json:"type"` //currently not used
+	Auth      string              `json:"auth"` //currently not used
 }
 
 var routes []Route
@@ -289,6 +295,8 @@ func GeneratePage(route Route, locale Locale) {
 	var mainScripts []string
 	var mainHtml string
 
+	var pageTitle = GetMultiLanguageText(route.Title, locale.Id) + " " + config.SiteTitleSeparator + " " + config.SiteTitle
+
 	var oldStrings = []string{"<?gen PAGE-LANG ?>", "<?gen PAGE-REPLACE-EXTENSION ?>", "<?gen PAGE-TITLE ?>", "<?gen PAGE-HEADER ?>", "<?gen PAGE-SIDEBAR ?>", "<?gen PAGE-MAIN ?>", "<?gen PAGE-FOOTER ?>", "<?gen BUILD-ID ?>", "<?gen BUILD-TIME ?>"}
 
 	for _, oldString := range oldStrings {
@@ -299,7 +307,7 @@ func GeneratePage(route Route, locale Locale) {
 		case "<?gen PAGE-REPLACE-EXTENSION ?>":
 			newString = strconv.FormatBool(config.ReplaceFileExtension)
 		case "<?gen PAGE-TITLE ?>":
-			newString = route.Title + " " + config.SiteTitleSeparator + " " + config.SiteTitle
+			newString = pageTitle
 		case "<?gen PAGE-HEADER ?>":
 			newString = headerHtml
 		case "<?gen PAGE-SIDEBAR ?>":
@@ -314,7 +322,7 @@ func GeneratePage(route Route, locale Locale) {
 
 						var moduleSrc = path.Join(config.DataPath, "/modules/", module.Src)
 
-						moduleHtml = ReadFile(moduleSrc)
+						moduleHtml = ReadFileLang(moduleSrc, locale.Id)
 
 						for _, script := range module.Scripts {
 
@@ -352,7 +360,7 @@ func GeneratePage(route Route, locale Locale) {
 	var pageRouteObj ExportedPage
 
 	pageRouteObj.Html = strings.Replace(mainHtml, "<?gen WEB-ROOT ?>", config.WebRoot+localePath, -1)
-	pageRouteObj.Title = route.Title + " " + config.SiteTitleSeparator + " " + config.SiteTitle
+	pageRouteObj.Title = pageTitle
 	pageRouteObj.Scripts = mainScripts
 
 	for index, script := range pageRouteObj.Scripts {
@@ -385,6 +393,24 @@ func GeneratePage(route Route, locale Locale) {
 
 }
 
+func GetMultiLanguageText(MLElems []MultiLanguageText, langId string) string {
+
+	if MLElems[0].Id == "_any" {
+		return MLElems[0].Text
+	}
+
+	for _, MLElem := range MLElems {
+
+		if MLElem.Id == langId {
+			return MLElem.Text
+		}
+
+	}
+
+	return ""
+
+}
+
 func CreateFile(filePath string, fileContents string) {
 	fmt.Println(printInfo("Writing file: [" + filePath + "] into filesystem"))
 
@@ -406,6 +432,32 @@ func ReadFile(filePath string) string {
 	} else {
 		return string(fileData)
 	}
+}
+
+func ReadFileLang(filePath string, langId string) string {
+
+	var fileContents = ReadFile(filePath)
+
+	//<\? START-LANG \[([a-z]{2})\] \?>([\s\S]*?)<\? END-LANG \?>
+
+	var r, _ = regexp.Compile("<\\? START-LANG \\[([a-z]{2})\\] \\?>([\\s\\S]*?)<\\? END-LANG \\?>")
+
+	var foundStrings = r.FindAllString(fileContents, -1)
+
+	for _, foundString := range foundStrings {
+
+		var stringCaptGroups = r.FindStringSubmatch(foundString)
+
+		if stringCaptGroups[1] == langId {
+			fileContents = strings.ReplaceAll(fileContents, foundString, stringCaptGroups[2])
+		} else {
+			fileContents = strings.ReplaceAll(fileContents, foundString, "")
+		}
+
+	}
+
+	return fileContents
+
 }
 
 // CopyDir copies the content of sourceFolder to destinationFolder. sourceFolder should be a full path.
