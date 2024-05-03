@@ -12,6 +12,24 @@
         "scripts": []
     },
     {
+        "id": "post_header",
+        "src": "post/header.html",
+        "type": "normal",
+        "scripts": []
+    },
+    {
+        "id": "post_body",
+        "src": "post/body.html",
+        "type": "normal",
+        "scripts": []
+    },
+    {
+        "id": "post_comments",
+        "src": "post/comments.html",
+        "type": "normal",
+        "scripts": []
+    },
+    {
         "id":"example1",
         "src": "example1.html",
         "type": "normal",

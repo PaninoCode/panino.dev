@@ -1,0 +1,25 @@
+[
+    {
+        "id": "",
+        "created": "27-4-2024",
+        "last_modified": null,
+        "media": {
+            "type": "image",
+            "src": "/images/posts/2024/may/hello_world.jpg"
+        },
+        "versions" : [
+            {
+                "lang_id": "en",
+                "permalink": "hello-world",
+                "file": "lang_en/2024/may/hello-world.html",
+                "title": "Hello World!"
+            },
+            { 
+                "lang_id": "it",
+                "permalink": "ciao-mondo",
+                "file": "lang_it/2024/may/ciao-mondo.html",
+                "title": "Ciao Mondo!"
+            }
+        ]
+    }
+]

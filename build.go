@@ -83,6 +83,42 @@ type Route struct {
 var routes []Route
 
 /*
+	#################### POST-MEDIA ####################
+*/
+
+type PostMedia struct {
+	Type string `json:"type"`
+	Src  string `json:"src"`
+}
+
+/*
+	#################### POST-VERSION ####################
+*/
+
+type PostVersion struct {
+	LangId    string `json:"lang_id"`
+	Permalink string `json:"permalink"`
+	File      string `json:"file"`
+	Title     string `json:"title"`
+}
+
+/*
+	#################### POSTS ####################
+*/
+
+// var routesJson string
+
+type Post struct {
+	Id               string        `json:"id"` //empty string for new posts
+	CreatedDate      string        `json:"created"`
+	LastModifiedDate string        `json:"last_modified"`
+	Media            PostMedia     `json:"media"`
+	Versions         []PostVersion `json:"versions"`
+}
+
+var posts []Post
+
+/*
 	#################### EXPORTED PAGE ####################
 */
 
@@ -185,6 +221,7 @@ func main() {
 	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/redirects.json"))), &redirects)
 	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/modules.json"))), &modules)
 	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/routes.json"))), &routes)
+	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/posts.json"))), &posts)
 	json.Unmarshal([]byte(ReadFile(path.Join(config.DataPath, "/config/locales.json"))), &locales)
 
 	// Static Modules
@@ -199,7 +236,7 @@ func main() {
 	os.RemoveAll(config.BuildPath)
 
 	// Try and create directory
-	os.Mkdir(config.BuildPath, os.ModePerm)
+	os.Mkdir(config.BuildPath, 0777)
 
 	// Directory check
 	var directoryCheck = "Directory: [" + config.BuildPath + "]"
@@ -220,10 +257,15 @@ func main() {
 
 			switch route.Type {
 			case "normal":
-				GeneratePage(route, locale)
+				GeneratePage(route, Post{}, locale)
+			case "post":
+				for _, post := range posts {
+					GeneratePage(route, post, locale)
+				}
 			case "ignore":
 				fmt.Println(printWarning("Page: [" + route.Id + "] is set to be ignored"))
 			}
+
 		}
 	}
 
@@ -232,7 +274,7 @@ func main() {
 
 		fmt.Println(printInfo("Creating redirect in: [" + redirect.Path + "] targeting: [" + redirect.Target + "]"))
 
-		var redirectHtml = "<script>window.location.replace(\"" + redirect.Target + "\");</script><p>You are being redirected, if you still see this page after a white <a href=\"" + redirect.Target + "\">click here</a>.</p>"
+		var redirectHtml = GetRedirectScript(redirect.Target)
 
 		CreateFile(path.Join(config.BuildPath, strings.TrimPrefix(redirect.Path, "/")+".html"), redirectHtml)
 
@@ -261,13 +303,13 @@ func main() {
 
 }
 
-func GeneratePage(route Route, locale Locale) {
+func GeneratePage(route Route, post Post, locale Locale) {
 
 	var localePath = locale.Path
 	var localeFolder = strings.Replace(localePath, "/", "", -1)
 
 	if localeFolder != "" {
-		os.Mkdir(path.Join(config.BuildPath, localeFolder), os.ModePerm)
+		os.Mkdir(path.Join(config.BuildPath, localeFolder), 0777)
 	}
 
 	fmt.Println(printInfo("Generating page: [" + route.Id + "] With path: \"" + route.Path + "\""))
@@ -275,8 +317,20 @@ func GeneratePage(route Route, locale Locale) {
 	var pageHtml string = baseHtml
 	var mainScripts []string
 	var mainHtml string
-
 	var pageTitle = GetMultiLanguageText(route.Title, locale.Id) + " " + config.SiteTitleSeparator + " " + config.SiteTitle
+	var currentVersion PostVersion
+
+	if route.Type == "post" {
+		fmt.Println(printInfo("Generating Post: [" + post.Id + "] With path: \"" + route.Path + "\""))
+
+		for _, version := range post.Versions {
+			if version.LangId == locale.Id {
+				currentVersion = version
+				pageTitle = version.Title + " " + config.SiteTitleSeparator + " " + config.SiteTitle
+			}
+		}
+
+	}
 
 	var oldStrings = []string{"<?gen PAGE-LANG ?>", "<?gen PAGE-REPLACE-EXTENSION ?>", "<?gen PAGE-TITLE ?>", "<?gen PAGE-HEADER ?>", "<?gen PAGE-SIDEBAR ?>", "<?gen PAGE-MAIN ?>", "<?gen PAGE-FOOTER ?>", "<?gen BUILD-ID ?>", "<?gen BUILD-TIME ?>"}
 
@@ -355,26 +409,45 @@ func GeneratePage(route Route, locale Locale) {
 
 	pageHtml = strings.Replace(pageHtml, "<?gen WEB-ROOT ?>", config.WebRoot+localePath, -1)
 
-	CreateFile(path.Join(config.BuildPath, localeFolder, newFileName+".html"), pageHtml)
-	//CreateFile(path.Join(config.BuildPath, newFileName+".content.txt"), mainHtml)
-	CreateFile(path.Join(config.BuildPath, localeFolder, newFileName+".json"), string(pageRouteJson))
+	switch route.Type {
+	case "normal":
+		CreateFile(path.Join(config.BuildPath, localeFolder, newFileName+".html"), pageHtml)
+		//CreateFile(path.Join(config.BuildPath, newFileName+".content.txt"), mainHtml)
+		CreateFile(path.Join(config.BuildPath, localeFolder, newFileName+".json"), string(pageRouteJson))
 
-	// Write aliases
+		// Write aliases
+		if route.Aliases != nil {
+			for _, alias := range route.Aliases {
+				fmt.Println(printInfo("Generating Alias: [" + alias + "]"))
 
-	if route.Aliases != nil {
-		for _, alias := range route.Aliases {
-			fmt.Println(printInfo("Generating Alias: [" + alias + "]"))
+				CreateFile(path.Join(config.BuildPath, localeFolder, strings.TrimPrefix(alias, "/")+".html"), pageHtml)
+				//CreateFile(path.Join(config.BuildPath, strings.TrimPrefix(alias, "/")+".content."), mainHtml)
+				CreateFile(path.Join(config.BuildPath, localeFolder, strings.TrimPrefix(alias, "/")+".json"), string(pageRouteJson))
 
-			CreateFile(path.Join(config.BuildPath, localeFolder, strings.TrimPrefix(alias, "/")+".html"), pageHtml)
-			//CreateFile(path.Join(config.BuildPath, strings.TrimPrefix(alias, "/")+".content."), mainHtml)
-			CreateFile(path.Join(config.BuildPath, localeFolder, strings.TrimPrefix(alias, "/")+".json"), string(pageRouteJson))
+			}
+		}
+	case "post":
+		CreateFile(path.Join(config.BuildPath, localeFolder, "post", currentVersion.Permalink+".html"), pageHtml)
+		CreateFile(path.Join(config.BuildPath, localeFolder, "post", currentVersion.Permalink+".json"), string(pageRouteJson))
 
+		for _, version := range post.Versions {
+			if version.LangId != locale.Id {
+				CreateFile(path.Join(config.BuildPath, localeFolder, "post", version.Permalink+".html"), GetRedirectScript(currentVersion.Permalink+".html"))
+			}
 		}
 	}
 
 }
 
+func GetRedirectScript(target string) string {
+	return "<meta http-equiv=\"refresh\" content=\"1; url=" + target + "\" /><script>window.location.replace(\"" + target + "\");</script><p>You are being redirected, if you still see this page after a white <a href=\"" + target + "\">click here</a>.</p>"
+}
+
 func GetMultiLanguageText(MLElems []MultiLanguageText, langId string) string {
+
+	if len(MLElems) <= 0 {
+		return ""
+	}
 
 	if MLElems[0].Id == "_any" {
 		return MLElems[0].Text
@@ -399,10 +472,10 @@ func CreateFile(filePath string, fileContents string) {
 
 	if _, err := os.Stat(fileDir); os.IsNotExist(err) {
 		fmt.Println(printInfo("Directory: [" + fileDir + "] does not exist, creating."))
-		os.MkdirAll(fileDir, 0644) // Create your file
+		os.MkdirAll(fileDir, 0777) // Create your file
 	}
 
-	err := os.WriteFile(filePath, []byte(fileContents), 0644)
+	err := os.WriteFile(filePath, []byte(fileContents), 0777)
 	if err != nil {
 		fmt.Println(printError("Error writing file [" + filePath + "] \n\t\t" + err.Error()))
 	} else {

@@ -42,6 +42,28 @@
         "auth": "none"
     },
     {
+        "id": "post",
+        "path": "/post/",
+        "aliases": null,
+        "structure": [
+            {
+                "id": "post_header",
+                "animation": null
+            },
+            {
+                "id": "post_body",
+                "animation": null
+            },
+            {
+                "id": "post_comments",
+                "animation": null
+            }
+        ],
+        "title": [],
+        "type": "post",
+        "auth": "none"
+    },
+    {
         "id": "not_found",
         "path": "/errors/404",
         "aliases": ["/not_found"],
