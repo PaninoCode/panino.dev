@@ -63,11 +63,11 @@ function setColorMode(name = null){
     });
 
     if ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && colorName == 'system') || colorName == 'dark') {
-        document.body.classList.remove("bg-light");
-        document.body.classList.add("bg-dark");
+        document.body.classList.remove("page-mode-light");
+        document.body.classList.add("page-mode-dark");
     }else{
-        document.body.classList.remove("bg-dark");
-        document.body.classList.add("bg-light");
+        document.body.classList.remove("page-mode-dark");
+        document.body.classList.add("page-mode-light");
     }
 
 }

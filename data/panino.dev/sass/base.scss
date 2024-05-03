@@ -10,6 +10,7 @@
 @import 'variables', 'text', 'modal', 'input', 'extra', 'table', 'icons', 'accordion';
 @import 'modules/static/header', 'modules/static/sidebar', 'modules/static/footer';
 @import 'modules/post/header', 'modules/post/body', 'modules/post/comments';
+@import 'pages/home';
 
 html {
     scroll-behavior: smooth;
@@ -18,6 +19,14 @@ html {
 body {
     padding: 0;
     margin: 0;
+}
+
+body.page-mode-dark {
+    background-color: $dark;
+}
+
+body.page-mode-light {
+    background-color: $light;
 }
 
 #contents {

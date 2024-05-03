@@ -106,6 +106,18 @@ label {
     @extend p;
 }
 
+.page-mode-dark {
+    .text-default {
+        color: $light;
+    }
+}
+
+.page-mode-light {
+    .text-default {
+        color: $dark;
+    }
+}
+
 .text-center {
     text-align: center;
 }
