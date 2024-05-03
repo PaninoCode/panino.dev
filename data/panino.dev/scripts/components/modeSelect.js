@@ -12,12 +12,15 @@ document.querySelectorAll('.language-select-btn').forEach(elem => {
 
         let pathNameS = window.location.pathname.substring(1).split("/");
 
+        console.log(pathNameS)
+        
+
         if (pathNameS[0] != id && (pathNameS[0] == "" || pathNameS[0] == "it")) {
             pathNameS[0] = id;
-            setTimeout(function () { location.href = pathNameS.join("/") }, 300);   
+            setTimeout(function () { location.href = window.location.origin + pathNameS.join("/") }, 300);   
         } else if (pathNameS[0] != id) {
             pathNameS.unshift(id);
-            setTimeout(function () { location.href = pathNameS.join("/") }, 300);
+            setTimeout(function () { location.href = window.location.origin + "/" + pathNameS.join("/") }, 300);
         }
     });
 });
