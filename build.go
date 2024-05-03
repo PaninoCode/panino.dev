@@ -9,7 +9,6 @@ package main
 
 import (
 	"crypto/rand"
-	_ "embed"
 	"encoding/json"
 	"fmt"
 	"io"
