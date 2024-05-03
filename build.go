@@ -319,9 +319,13 @@ func GeneratePage(route Route, post Post, locale Locale) {
 	var mainHtml string
 	var pageTitle = GetMultiLanguageText(route.Title, locale.Id) + " " + config.SiteTitleSeparator + " " + config.SiteTitle
 	var currentVersion PostVersion
+	var oldStrings = []string{"<?gen PAGE-LANG ?>", "<?gen PAGE-REPLACE-EXTENSION ?>", "<?gen PAGE-TITLE ?>", "<?gen PAGE-HEADER ?>", "<?gen PAGE-SIDEBAR ?>", "<?gen PAGE-MAIN ?>", "<?gen PAGE-FOOTER ?>", "<?gen BUILD-ID ?>", "<?gen BUILD-TIME ?>"}
 
 	if route.Type == "post" {
 		fmt.Println(printInfo("Generating Post: [" + post.Id + "] With path: \"" + route.Path + "\""))
+
+		oldStrings = append(oldStrings, "<?gen POST-TITLE ?>")
+		oldStrings = append(oldStrings, "<?gen POST-CONTENTS ?>")
 
 		for _, version := range post.Versions {
 			if version.LangId == locale.Id {
@@ -331,8 +335,6 @@ func GeneratePage(route Route, post Post, locale Locale) {
 		}
 
 	}
-
-	var oldStrings = []string{"<?gen PAGE-LANG ?>", "<?gen PAGE-REPLACE-EXTENSION ?>", "<?gen PAGE-TITLE ?>", "<?gen PAGE-HEADER ?>", "<?gen PAGE-SIDEBAR ?>", "<?gen PAGE-MAIN ?>", "<?gen PAGE-FOOTER ?>", "<?gen BUILD-ID ?>", "<?gen BUILD-TIME ?>"}
 
 	for _, oldString := range oldStrings {
 		var newString string
@@ -370,6 +372,11 @@ func GeneratePage(route Route, post Post, locale Locale) {
 				newString += moduleHtml + moduleJs
 				mainHtml += moduleHtml
 			}
+		case "<?gen POST-TITLE ?>":
+			newString = currentVersion.Title
+		case "<?gen POST-CONTENTS ?>":
+			var postSrc = path.Join(config.DataPath, "/posts/", currentVersion.File)
+			newString = ReadFile(postSrc)
 		case "<?gen PAGE-FOOTER ?>":
 			newString = footerHtml
 		case "<?gen BUILD-ID ?>":
