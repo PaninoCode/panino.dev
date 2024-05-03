@@ -8,8 +8,8 @@
 @import url('https://fonts.bunny.net/css?family=roboto-slab:400,500');
 
 @import 'variables', 'text', 'modal', 'input', 'extra', 'table', 'icons', 'accordion';
-@import 'modules/header', 'modules/sidebar', 'modules/footer';
-// @import 'pages/home';
+@import 'modules/static/header', 'modules/static/sidebar', 'modules/static/footer';
+@import 'modules/post/header', 'modules/post/body', 'modules/post/comments';
 
 html {
     scroll-behavior: smooth;
