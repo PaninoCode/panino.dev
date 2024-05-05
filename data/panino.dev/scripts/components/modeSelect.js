@@ -17,13 +17,21 @@ document.querySelectorAll('.language-select-btn').forEach(elem => {
 
         if (pathNameS[0] != id && (pathNameS[0] == "" || pathNameS[0] == "it")) {
             pathNameS[0] = id;
-            setTimeout(function () { location.href = window.location.origin + pathNameS.join("/") }, 300);   
+            setTimeout(redirectToLang(pathNameS.join("/")), 300);   
         } else if (pathNameS[0] != id) {
             pathNameS.unshift(id);
-            setTimeout(function () { location.href = window.location.origin + "/" + pathNameS.join("/") }, 300);
+            setTimeout(redirectToLang(pathNameS.join("/")), 300);
         }
     });
 });
+
+function redirectToLang(pathNameS){
+    if(pathNameS[0] == "/"){
+        location.href = window.location.origin + pathNameS
+    }else{
+        location.href = window.location.origin + "/" + pathNameS
+    }
+}
 
 const colorModes = ['system', 'light', 'dark'];
 
